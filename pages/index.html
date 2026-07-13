@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>RoomLedger</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+
+  <div class="max-w-5xl mx-auto px-6 py-16">
+
+    <!-- Hero -->
+    <div class="text-center">
+
+      <div class="text-6xl mb-4">
+        🏠
+      </div>
+
+      <h1 class="text-4xl md:text-6xl font-bold text-slate-800">
+        RoomLedger
+      </h1>
+
+      <p class="mt-5 text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
+        Smart expense tracking for roommates.
+        Manage your monthly budget, track daily expenses,
+        and stay within your limit.
+      </p>
+
+    </div>
+
+    <!-- Main Card -->
+    <div class="mt-12 bg-white rounded-3xl shadow-xl p-8">
+
+      <!-- Welcome -->
+      <div class="text-center">
+
+        <h2 class="text-3xl font-bold text-slate-800">
+          Welcome 👋
+        </h2>
+
+        <p class="mt-2 text-slate-500">
+          Start managing your room expenses in just a few minutes.
+        </p>
+
+      </div>
+
+      <!-- Room Info (Hide with JS later if no room exists) -->
+      <div class="mt-10 bg-slate-100 rounded-2xl p-6">
+
+        <h3 class="text-xl font-bold text-slate-800 mb-4">
+          Current Room
+        </h3>
+
+        <div class="grid md:grid-cols-3 gap-4">
+
+          <div>
+            <p class="text-sm text-slate-500">
+              Room Name
+            </p>
+
+            <h4 class="font-semibold text-lg">
+              Everest Boys Room
+            </h4>
+          </div>
+
+          <div>
+            <p class="text-sm text-slate-500">
+              Members
+            </p>
+
+            <h4 class="font-semibold text-lg">
+              4 Members
+            </h4>
+          </div>
+
+          <div>
+            <p class="text-sm text-slate-500">
+              Budget
+            </p>
+
+            <h4 class="font-semibold text-lg text-blue-600">
+              Rs. 30,000
+            </h4>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Buttons -->
+      <div class="grid md:grid-cols-3 gap-4 mt-10">
+
+        <a
+          href="setup.html"
+          class="text-center bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold transition">
+
+          ➕ Create Room
+
+        </a>
+
+        <a
+          href="dashboard.html"
+          class="text-center bg-slate-800 hover:bg-slate-900 text-white py-4 rounded-xl font-semibold transition">
+
+          📊 Dashboard
+
+        </a>
+
+        <a
+          href="expenses.html"
+          class="text-center bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-semibold transition">
+
+          📜 All Expenses
+
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Features -->
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+
+      <div class="bg-white rounded-2xl shadow p-6">
+
+        <div class="text-3xl">
+          💰
+        </div>
+
+        <h3 class="font-bold text-xl mt-3">
+          Budget Tracking
+        </h3>
+
+        <p class="text-slate-500 mt-2">
+          Set a monthly budget and monitor your spending.
+        </p>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow p-6">
+
+        <div class="text-3xl">
+          👥
+        </div>
+
+        <h3 class="font-bold text-xl mt-3">
+          Shared Expenses
+        </h3>
+
+        <p class="text-slate-500 mt-2">
+          Keep track of who paid for every expense.
+        </p>
+
+      </div>
+
+      <div class="bg-white rounded-2xl shadow p-6">
+
+        <div class="text-3xl">
+          📈
+        </div>
+
+        <h3 class="font-bold text-xl mt-3">
+          Stay Within Budget
+        </h3>
+
+        <p class="text-slate-500 mt-2">
+          Get warned before your monthly budget is exceeded.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+<script type="module" src="./js/index.js"></script>
+</body>
+</html>

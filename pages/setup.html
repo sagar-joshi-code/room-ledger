@@ -1,120 +1,121 @@
 <html>
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Room - RoomLedger</title>
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Create Room - RoomLedger</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
 
-  <body
-    class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100"
-  >
-    <div class="max-w-3xl mx-auto px-6 py-12">
-      <!-- Header -->
-      <div class="text-center mb-10">
-        <div class="text-5xl mb-3">⚙️</div>
+    <body
+      class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100"
+    >
+      <div class="max-w-3xl mx-auto px-6 py-12">
+        <!-- Header -->
+        <div class="text-center mb-10">
+          <div class="text-5xl mb-3">⚙️</div>
 
-        <h1 class="text-4xl font-bold text-slate-800">Create Your Room</h1>
+          <h1 class="text-4xl font-bold text-slate-800">Create Your Room</h1>
 
-        <p class="text-slate-500 mt-3">
-          Set up your room once and start tracking expenses.
-        </p>
-      </div>
-
-      <!-- Card -->
-      <div class="bg-white rounded-3xl shadow-xl p-8">
-        <!-- Room Name -->
-        <div>
-          <label class="block font-semibold text-slate-700 mb-2">
-            Room Name
-          </label>
-
-          <input
-            id="roomName"
-            type="text"
-            placeholder="Example: Everest Boys Room"
-            class="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <p class="text-slate-500 mt-3">
+            Set up your room once and start tracking expenses.
+          </p>
         </div>
 
-        <!-- Members -->
-        <div class="mt-8">
-          <label class="block font-semibold text-slate-700 mb-2">
-            Add Members
-          </label>
+        <!-- Card -->
+        <div class="bg-white rounded-3xl shadow-xl p-8">
+          <!-- Room Name -->
+          <div>
+            <label class="block font-semibold text-slate-700 mb-2">
+              Room Name
+            </label>
 
-          <div class="flex gap-3">
             <input
-              id="memberInput"
+              id="roomName"
               type="text"
-              placeholder="Enter member name"
-              class="flex-1 border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Example: Everest Boys Room"
+              class="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-
-            <button
-              id="addMemberBtn"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-6 rounded-xl font-semibold transition"
-            >
-              + Add
-            </button>
           </div>
-        </div>
 
-        <!-- Members List -->
-        <div class="mt-6">
-          <h3 class="font-semibold text-slate-700 mb-3">Room Members</h3>
+          <!-- Members -->
+          <div class="mt-8">
+            <label class="block font-semibold text-slate-700 mb-2">
+              Add Members
+            </label>
 
-          <div id="memberList" class="space-y-3">
-            <!-- Sample Members -->
+            <div class="flex gap-3">
+              <input
+                id="memberInput"
+                type="text"
+                placeholder="Enter member's full name"
+                class="flex-1 border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
 
-            <div
-              class="flex justify-between items-center bg-slate-100 rounded-xl px-4 py-3"
-            >
-              <span>👤 Sagar</span>
-
-              <button class="text-red-500 hover:text-red-700 font-semibold">
-                Remove
-              </button>
-            </div>
-
-            <div
-              class="flex justify-between items-center bg-slate-100 rounded-xl px-4 py-3"
-            >
-              <span>👤 Anup</span>
-
-              <button class="text-red-500 hover:text-red-700 font-semibold">
-                Remove
+              <button
+                id="addMemberBtn"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 rounded-xl font-semibold transition"
+              >
+                + Add
               </button>
             </div>
           </div>
+
+          <!-- Members List -->
+          <div class="mt-6">
+            <h3 class="font-semibold text-slate-700 mb-3">Room Members</h3>
+
+            <div id="memberList" class="space-y-3">
+              <!-- Sample Members -->
+
+              <div
+                class="flex justify-between items-center bg-slate-100 rounded-xl px-4 py-3"
+              >
+                <span>👤 Sagar</span>
+
+                <button class="text-red-500 hover:text-red-700 font-semibold">
+                  Remove
+                </button>
+              </div>
+
+              <div
+                class="flex justify-between items-center bg-slate-100 rounded-xl px-4 py-3"
+              >
+                <span>👤 Anup</span>
+
+                <button class="text-red-500 hover:text-red-700 font-semibold">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Budget -->
+          <div class="mt-8">
+            <label class="block font-semibold text-slate-700 mb-2">
+              Monthly Budget
+            </label>
+
+            <input
+              id="budget"
+              type="number"
+              placeholder="Example: 30000"
+              class="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <!-- Create Room Button -->
+          <button
+            id="createRoomBtn"
+            class="mt-10 w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl text-lg font-semibold transition"
+          >
+            🏠 Create Room
+          </button>
         </div>
-
-        <!-- Budget -->
-        <div class="mt-8">
-          <label class="block font-semibold text-slate-700 mb-2">
-            Monthly Budget
-          </label>
-
-          <input
-            id="budget"
-            type="number"
-            placeholder="Example: 30000"
-            class="w-full border border-slate-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <!-- Create Room Button -->
-        <button
-          id="createRoomBtn"
-          class="mt-10 w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl text-lg font-semibold transition"
-        >
-          🏠 Create Room
-        </button>
       </div>
-    </div>
-    <script type="module" src="./js/setup.js"></script>
-  </body>
+      <script type="module" src="../js/setup.js"></script>
+    </body>
+  </html>
 </html>

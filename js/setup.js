@@ -9,8 +9,6 @@ const memberList = document.getElementById("memberList");
 const budgetInput = document.getElementById("budget");
 const createRoomBtn = document.getElementById("createRoomBtn");
 
-console.log(memberList);
-
 //add member
 function addMember() {
   const readMemberInput = memberInput.value.trim();
@@ -70,5 +68,32 @@ function renderMembers() {
     memberList.appendChild(memberCard);
   });
 }
+
+//adding functionality to create btn
+createRoomBtn.addEventListener("click", () => {
+  const roomName = roomNameInput.value.trim();
+  const roomMembers = members;
+  const roomBudget = Number(budgetInput.value);
+  //validate roomName
+  if (roomName === "") {
+    alert("Please enter your room name");
+    return;
+  }
+  if (roomMembers.length < 1) {
+    alert("Please enter at least one member");
+    return;
+  }
+  if (roomBudget < 1) {
+    alert("Budget should be greater than 0");
+    return;
+  }
+  //creating room object
+  const room = {
+    name: roomName,
+    members: [...roomMembers],
+    budget: roomBudget,
+  };
+  console.log(room);
+});
 
 renderMembers();

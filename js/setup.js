@@ -20,19 +20,21 @@ function addMember() {
     return;
   }
 
-  preventDuplicate(readMemberInput);
-
+  if (preventDuplicate(readMemberInput)) {
+    alert("Member already exists!");
+    return;
+  } else {
+    members.push(readMemberInput);
+  }
   memberInput.value = "";
   renderMembers();
 }
 
 //function to prevent duplicate name
 function preventDuplicate(name) {
-  if (members.includes(name)) {
-    alert(`${name} already exists!`);
-  } else {
-    members.push(name);
-  }
+  return members.some((member) => {
+    return member.toLowerCase() === name.toLowerCase();
+  });
 }
 
 //button click
@@ -47,7 +49,6 @@ memberInput.addEventListener("keypress", (event) => {
 //render members
 function renderMembers() {
   memberList.innerHTML = "";
-
   members.forEach((member, idx) => {
     const memberCard = document.createElement("div");
     memberCard.className = "bg-slate-200 rounded-xl p-3 flex justify-between";

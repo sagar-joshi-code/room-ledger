@@ -1,3 +1,6 @@
+import { saveRoom } from "./storage.js";
+console.log("setup.js loaded");
+
 //storing members temporary
 let members = [];
 
@@ -93,6 +96,7 @@ createRoomBtn.addEventListener("click", () => {
     members: [...roomMembers],
     budget: roomBudget,
   };
+  saveRoom(room);
   console.log(room);
 });
 

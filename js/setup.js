@@ -96,7 +96,7 @@ createRoomBtn.addEventListener("click", () => {
     budget: roomBudget,
   };
   saveRoom(room);
-  console.log("Room created successfully");
+  alert("Room created successfully");
+  window.location.href = "index.html";
 });
-
 renderMembers();

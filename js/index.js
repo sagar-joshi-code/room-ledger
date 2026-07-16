@@ -1,4 +1,4 @@
-console.log("index.js is running");
+// console.log("index.js is running");
 import { loadRoom } from "./storage.js";
 const room = loadRoom();
 console.log(room);

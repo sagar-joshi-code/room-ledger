@@ -15,5 +15,5 @@ export function saveExpenses(roomExpense) {
 
 //load expenses from localstorage
 export function loadExpenses() {
-  return JSON.parse(localStorage.getItem("roomExpenses"))
+  return JSON.parse(localStorage.getItem("roomExpenses")) || [];
 }

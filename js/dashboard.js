@@ -2,9 +2,6 @@
 import { loadRoom, loadExpenses, saveExpenses } from "./storage.js";
 const room = loadRoom();
 const expenses = loadExpenses();
-// console.log(expenses);
-
-// console.log(room);
 
 //making showing members in expenses form
 const paidBySelect = document.getElementById("expensePaidBy");
@@ -58,16 +55,21 @@ addExpenseBtn.addEventListener("click", () => {
     return;
   }
 
+  const now = new Date();
   //creating expenses object
   const expense = {
     title: expenseTitleVal,
     amount: Number(expenseAmountVal),
     paidBy: expensePaidByVal,
     category: expenseCategoryVal,
+    date: now.toLocaleDateString(),
+    time: now.toLocaleTimeString(),
   };
   expenses.push(expense);
   saveExpenses(expenses);
   clearExpenseForm();
+  renderExpenses();
+  updateDashboard();
   console.log(expenses);
 });
 
@@ -79,44 +81,80 @@ function clearExpenseForm() {
   expenseCategory.value = "";
 }
 
-//making calculation on total spent
-const spent = expenses.reduce((total, exp) => {
-  return total + exp.amount;
-}, 0);
+//updating dashboard
+function updateDashboard() {
+  //making calculation on total spent
+  const spent = expenses.reduce((total, exp) => {
+    return total + exp.amount;
+  }, 0);
 
-//selecting total spent and putting spent value on it
-const totalSpent = document.getElementById("totalSpent");
-totalSpent.textContent = `RS. ${spent}`;
+  //selecting total spent and putting spent value on it
+  const totalSpent = document.getElementById("totalSpent");
+  totalSpent.textContent = `RS. ${spent}`;
 
-//calculating remaining bbudget
-const remaining = room.budget - spent;
-////selecting remainingBudget and putting spent value on it
-const remainingBudget = document.getElementById("remainingBudget");
-remainingBudget.textContent = `RS. ${remaining}`;
+  //calculating remaining bbudget
+  const remaining = room.budget - spent;
+  ////selecting remainingBudget and putting spent value on it
+  const remainingBudget = document.getElementById("remainingBudget");
+  remainingBudget.textContent = `RS. ${remaining}`;
 
-//calculating usage percentage
-const usage = (spent / room.budget) * 100;
-const budgetUsage = document.getElementById("budgetUsage");
-budgetUsage.textContent = `${usage.toFixed(2)}%`;
+  //calculating usage percentage
+  const usage = (spent / room.budget) * 100;
+  const budgetUsage = document.getElementById("budgetUsage");
+  budgetUsage.textContent = `${usage.toFixed(2)}%`;
 
-//selecting progress bar
-const progressBar = document.getElementById("progressBar");
-progressBar.style.width = `${usage}%`;
+  //selecting progress bar
+  const progressBar = document.getElementById("progressBar");
+  progressBar.style.width = `${usage}%`;
 
-if (usage <= 50) {
-  progressBar.style.backgroundColor = "green";
-} else if (usage <= 80) {
-  progressBar.style.backgroundColor = "yellow";
-} else {
-  progressBar.style.backgroundColor = "red";
+  if (usage <= 50) {
+    progressBar.style.backgroundColor = "green";
+  } else if (usage <= 80) {
+    progressBar.style.backgroundColor = "yellow";
+  } else {
+    progressBar.style.backgroundColor = "red";
+  }
+
+  //selecting budget status
+  const budgetStatus = document.getElementById("budgetStatus");
+  if (usage <= 50) {
+    budgetStatus.textContent = "✅ Within Budget";
+  } else if (usage <= 80) {
+    budgetStatus.textContent = "⚠️ Spending is increasing";
+  } else {
+    budgetStatus.textContent = "🚨 Budget limit reached";
+  }
 }
 
-//selecting budget status
-const budgetStatus = document.getElementById("budgetStatus");
-if (usage <= 50) {
-  budgetStatus.textContent = "✅ Within Budget";
-} else if (usage <= 80) {
-  budgetStatus.textContent = "⚠️ Spending is increasing";
-} else {
-  budgetStatus.textContent = "🚨 Budget limit reached";
+//selecting expenseList
+const expenseList = document.getElementById("expenseList");
+//rendering function
+function renderExpenses() {
+  //clearing old data
+  expenseList.innerHTML = "";
+  //looping on expense list
+  expenses.forEach((exp, idx) => {
+    const card = document.createElement("div");
+    card.className = "bg-white p-5 rounded-2xl shadow";
+    card.innerHTML = ` 
+    <h3>🍛 ${exp.title}</h3>
+    <p>🏷️ ${exp.category}</p>
+    <p>🙋 Paid By ${exp.paidBy}</p>
+    <p>📅 ${exp.date}</p>
+    <p>🕒 ${exp.time}</p>
+    <p>💸 Rs. ${exp.amount}</p>
+    `;
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => {
+      expenses.splice(idx, 1);
+      saveExpenses(expenses);
+      renderExpenses();
+      updateDashboard();
+    });
+    card.appendChild(deleteBtn);
+    expenseList.appendChild(card);
+  });
 }
+updateDashboard();
+renderExpenses();

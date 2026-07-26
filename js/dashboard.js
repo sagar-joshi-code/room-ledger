@@ -98,3 +98,25 @@ remainingBudget.textContent = `RS. ${remaining}`;
 const usage = (spent / room.budget) * 100;
 const budgetUsage = document.getElementById("budgetUsage");
 budgetUsage.textContent = `${usage.toFixed(2)}%`;
+
+//selecting progress bar
+const progressBar = document.getElementById("progressBar");
+progressBar.style.width = `${usage}%`;
+
+if (usage <= 50) {
+  progressBar.style.backgroundColor = "green";
+} else if (usage <= 80) {
+  progressBar.style.backgroundColor = "yellow";
+} else {
+  progressBar.style.backgroundColor = "red";
+}
+
+//selecting budget status
+const budgetStatus = document.getElementById("budgetStatus");
+if (usage <= 50) {
+  budgetStatus.textContent = "✅ Within Budget";
+} else if (usage <= 80) {
+  budgetStatus.textContent = "⚠️ Spending is increasing";
+} else {
+  budgetStatus.textContent = "🚨 Budget limit reached";
+}

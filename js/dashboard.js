@@ -1,3 +1,4 @@
+let editingIndex = null;
 // console.log("dashboard.js loaded");
 import { loadRoom, loadExpenses, saveExpenses } from "./storage.js";
 const room = loadRoom();
@@ -65,12 +66,19 @@ addExpenseBtn.addEventListener("click", () => {
     date: now.toLocaleDateString(),
     time: now.toLocaleTimeString(),
   };
-  expenses.push(expense);
+  if (editingIndex === null) {
+    // adding new expense
+    expenses.push(expense);
+  } else {
+    // updating existing expense
+    expenses[editingIndex] = expense;
+    editingIndex = null;
+    addExpenseBtn.textContent = "Add Expense";
+  }
+
   saveExpenses(expenses);
   clearExpenseForm();
-  renderExpenses();
-  updateDashboard();
-  console.log(expenses);
+  refreshUI();
 });
 
 //function to clear values of a form
@@ -79,6 +87,11 @@ function clearExpenseForm() {
   expenseAmount.value = "";
   expensePaidBy.value = "";
   expenseCategory.value = "";
+}
+//helper function
+function refreshUI() {
+  renderExpenses();
+  updateDashboard();
 }
 
 //updating dashboard
@@ -90,13 +103,13 @@ function updateDashboard() {
 
   //selecting total spent and putting spent value on it
   const totalSpent = document.getElementById("totalSpent");
-  totalSpent.textContent = `RS. ${spent}`;
+  totalSpent.textContent = `RS. ${spent.toLocaleString()}`;
 
   //calculating remaining bbudget
   const remaining = room.budget - spent;
   ////selecting remainingBudget and putting spent value on it
   const remainingBudget = document.getElementById("remainingBudget");
-  remainingBudget.textContent = `RS. ${remaining}`;
+  remainingBudget.textContent = `RS. ${remaining.toLocaleString()}`;
 
   //calculating usage percentage
   const usage = (spent / room.budget) * 100;
@@ -105,7 +118,8 @@ function updateDashboard() {
 
   //selecting progress bar
   const progressBar = document.getElementById("progressBar");
-  progressBar.style.width = `${usage}%`;
+  const progressWidth = Math.min(usage, 100);
+  progressBar.style.width = `${progressWidth}%`;
 
   if (usage <= 50) {
     progressBar.style.backgroundColor = "green";
@@ -118,11 +132,13 @@ function updateDashboard() {
   //selecting budget status
   const budgetStatus = document.getElementById("budgetStatus");
   if (usage <= 50) {
-    budgetStatus.textContent = "✅ Within Budget";
+    budgetStatus.textContent = "✅ Excellent! Budget is healthy.";
   } else if (usage <= 80) {
-    budgetStatus.textContent = "⚠️ Spending is increasing";
+    budgetStatus.textContent = "⚠️ Be careful. You're nearing the budget.";
+  } else if (usage <= 100) {
+    budgetStatus.textContent = "🚨 Almost out of budget!";
   } else {
-    budgetStatus.textContent = "🚨 Budget limit reached";
+    budgetStatus.textContent = `❌ Over budget by Rs. ${(spent - room.budget).toLocaleString()}`;
   }
 }
 
@@ -135,26 +151,100 @@ function renderExpenses() {
   //looping on expense list
   expenses.forEach((exp, idx) => {
     const card = document.createElement("div");
-    card.className = "bg-white p-5 rounded-2xl shadow";
-    card.innerHTML = ` 
-    <h3>🍛 ${exp.title}</h3>
-    <p>🏷️ ${exp.category}</p>
-    <p>🙋 Paid By ${exp.paidBy}</p>
-    <p>📅 ${exp.date}</p>
-    <p>🕒 ${exp.time}</p>
-    <p>💸 Rs. ${exp.amount}</p>
-    `;
+
+    card.className = `
+bg-white 
+p-5 
+rounded-2xl 
+shadow-md 
+border 
+border-slate-100
+hover:shadow-lg
+hover:-translate-y-1
+transition
+`;
+
+    card.innerHTML = `
+<div class="flex justify-between items-center">
+
+  <div>
+    <h3 class="text-xl font-bold text-slate-800">
+      🍛 ${exp.title}
+    </h3>
+
+    <span class="inline-block mt-2 px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-700">
+      🏷️ ${exp.category}
+    </span>
+  </div>
+
+
+  <span class="px-4 py-2 rounded-xl bg-red-100 text-red-600 font-bold">
+    Rs. ${exp.amount.toLocaleString()}
+  </span>
+
+</div>
+
+
+<div class="mt-4 space-y-2 text-slate-600">
+
+<p>
+🙋 Paid By:
+<span class="font-semibold">
+${exp.paidBy}
+</span>
+</p>
+
+<p class="text-sm text-slate-400">
+📅 ${exp.date} • 🕒 ${exp.time}
+</p>
+
+</div>
+`;
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "✏️ Edit";
+    editBtn.className = `
+mt-4
+px-4
+py-2
+rounded-xl
+bg-blue-500
+text-white
+font-semibold
+hover:bg-blue-600
+transition
+`;
+    editBtn.addEventListener("click", () => {
+      editingIndex = idx;
+
+      expenseTitle.value = exp.title;
+      expenseAmount.value = exp.amount;
+      expensePaidBy.value = exp.paidBy;
+      expenseCategory.value = exp.category;
+
+      addExpenseBtn.textContent = "Update Expense";
+    });
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
+    deleteBtn.textContent = "🗑 Delete";
+    deleteBtn.className = `
+ml-4    
+mt-4
+px-4
+py-2
+rounded-xl
+bg-red-500
+text-white
+font-semibold
+hover:bg-red-600
+transition
+`;
     deleteBtn.addEventListener("click", () => {
       expenses.splice(idx, 1);
       saveExpenses(expenses);
-      renderExpenses();
-      updateDashboard();
+      refreshUI();
     });
+    card.appendChild(editBtn);
     card.appendChild(deleteBtn);
     expenseList.appendChild(card);
   });
 }
-updateDashboard();
-renderExpenses();
+refreshUI();

@@ -97,6 +97,6 @@ createRoomBtn.addEventListener("click", () => {
   };
   saveRoom(room);
   alert("Room created successfully");
-  window.location.href = "index.html";
+  window.location.href = "dashboard.html";
 });
 renderMembers();

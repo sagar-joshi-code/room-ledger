@@ -115,7 +115,8 @@ function updateDashboard() {
   const usage = (spent / room.budget) * 100;
   const budgetUsage = document.getElementById("budgetUsage");
   budgetUsage.textContent = `${usage.toFixed(2)}%`;
-
+  const progressText = document.getElementById("progressText");
+  progressText.textContent = `${usage.toFixed(2)}%`;
   //selecting progress bar
   const progressBar = document.getElementById("progressBar");
   const progressWidth = Math.min(usage, 100);

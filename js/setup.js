@@ -98,6 +98,6 @@ createRoomBtn.addEventListener("click", () => {
   saveRoom(room);
   saveExpenses([]);
   alert("Room created successfully");
-  window.location.href = "dashboard.html";
+  window.location.href = "./dashboard.html";
 });
 renderMembers();

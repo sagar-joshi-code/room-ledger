@@ -1,8 +1,16 @@
-let editingIndex = null;
 // console.log("dashboard.js loaded");
 import { loadRoom, loadExpenses, saveExpenses } from "./storage.js";
+let editingIndex = null;
+
 const room = loadRoom();
 const expenses = loadExpenses();
+
+// Validate room existence before loading dashboard data
+if (!room) {
+  alert("Please create a room first");
+  window.location.href = "./setup.html";
+  throw new Error("Room data missing");
+}
 
 //making showing members in expenses form
 const paidBySelect = document.getElementById("expensePaidBy");
@@ -23,7 +31,7 @@ createNewRoom.addEventListener("click", () => {
 
   if (!confirmRoom) return;
 
-  window.location.href = "../pages/setup.html";
+  window.location.href = "./setup.html";
 });
 
 //selecting elements
@@ -59,7 +67,7 @@ addExpenseBtn.addEventListener("click", () => {
     return;
   }
   if (!expensePaidByVal) {
-    alert("Please select member member");
+    alert("Please select a member");
     return;
   }
   if (!expenseCategoryVal) {
@@ -250,6 +258,9 @@ hover:bg-red-600
 transition
 `;
     deleteBtn.addEventListener("click", () => {
+      const confirmDelete = confirm("Delete this expense?");
+
+      if (!confirmDelete) return;
       expenses.splice(idx, 1);
       saveExpenses(expenses);
       refreshUI();

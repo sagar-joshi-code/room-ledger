@@ -5,7 +5,7 @@ export function saveRoom(data) {
 
 // load data from localstorage
 export function loadRoom() {
-  return JSON.parse(localStorage.getItem("roomData"));
+  return JSON.parse(localStorage.getItem("roomData")) || null;
 }
 
 //save expenses to localstorage

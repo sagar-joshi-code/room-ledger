@@ -14,6 +14,17 @@ room.members.forEach((member) => {
   option.value = member;
   paidBySelect.appendChild(option);
 });
+// New Room button
+const createNewRoom = document.getElementById("createNewRoom");
+createNewRoom.addEventListener("click", () => {
+  const confirmRoom = confirm(
+    "Creating a new room will remove all current expenses. Continue?",
+  );
+
+  if (!confirmRoom) return;
+
+  window.location.href = "../pages/setup.html";
+});
 
 //selecting elements
 const roomName = document.getElementById("roomName");

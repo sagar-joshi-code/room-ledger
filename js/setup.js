@@ -1,4 +1,4 @@
-import { saveRoom } from "./storage.js";
+import { saveExpenses, saveRoom } from "./storage.js";
 
 //storing members temporary
 let members = [];
@@ -96,6 +96,7 @@ createRoomBtn.addEventListener("click", () => {
     budget: roomBudget,
   };
   saveRoom(room);
+  saveExpenses([]);
   alert("Room created successfully");
   window.location.href = "dashboard.html";
 });

@@ -88,7 +88,7 @@ RoomLedger/
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/RoomLedger.git
+git clone https://github.com/sagar-joshi-code/room-ledger.git
 ```
 
 Open the project
@@ -136,10 +136,10 @@ This project will be rebuilt using **React** with additional features such as:
 
 **Sagar Joshi**
 
-- GitHub: https://github.com/yourusername
+- GitHub: https://github.com/sagar-joshi-code
 
 ---
 
 ## 📄 License
 
-This project is created for learning and portfolio purposes.
+This project is created to help roommates manage shared room expenses and for portfolio purposes.

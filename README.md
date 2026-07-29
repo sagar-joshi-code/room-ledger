@@ -55,7 +55,7 @@ It helps roommates keep track of their shared expenses, monitor the room budget,
 
 ## 🚀 Live Demo
 
-https://your-vercel-link.vercel.app
+https://room-ledgerv1.vercel.app
 
 ---
 
